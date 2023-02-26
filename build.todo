@@ -1,3 +1,4 @@
+# It's recommended to add source files before setting other rules up
 add "src/main.c"
 add "src/parser.c"
 add "src/parser.h"
