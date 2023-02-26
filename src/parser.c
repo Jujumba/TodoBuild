@@ -1,6 +1,7 @@
 #include "parser.h"
 #include "lexer.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 extern char* path;
 char *query = NULL;
@@ -18,7 +19,9 @@ void parse() {
 
     while ((t = get_next(f)) != END) {
         if (get_next(f) != PATH) {
-            fprintf(stderr, "Expected: path, but got: bullshit");
+            extern int position;
+            fprintf(stderr, "Unexpected token at position: %i", position);
+            exit(EXIT_FAILURE);
         }
         switch (t) {
             case INCLUDE: {

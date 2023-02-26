@@ -1,7 +1,7 @@
 #include "lexer.h"
 #include <stdio.h>
 char *path;
-
+int position;
 Token get_next(FILE* f) {
     static char current = ' ';
     while (isspace(current)) {
@@ -13,24 +13,29 @@ Token get_next(FILE* f) {
     int head = 0;
     if (current == '#') { // skip comments
         while (current != '\n' && current != EOF) {
-            current = getc(f);
+            current = (char) getc(f);
+            ++position;
         }
-        current = getc(f);
+        current = (char) getc(f);
+        ++position;
     }
     if (current == '"') {
         if (path == NULL) {
             path = (char*) malloc(sizeof(char) * MAX_PATH_LENGTH);
         }
         current = (char) getc(f);
+        ++position;
         while (current != '"') {
             if (current == EOF) {
                 return UNKNOWN; // unclosed "
             }
             path[head++] = current;
             current = (char) getc(f);
+            ++position;
         }
         path[head] = '\0';
         current = (char) getc(f);
+        ++position;
         return PATH;
     }
     char* command = (char*) malloc(sizeof(char) * MAX_COMMAND_LENGTH);
@@ -41,6 +46,7 @@ Token get_next(FILE* f) {
         }
         command[head++] = current;
         current = (char) getc(f);
+        ++position;
     }
     command[head] = '\0';
     if (!strcmp(command, INCLUDE_COMMAND)) {
