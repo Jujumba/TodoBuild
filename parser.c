@@ -33,7 +33,7 @@ void parse() {
     sprintf(query, "clang");
 
     for (int i = 0; i < head; i++) {
-        sprintf(query, "%s %s", query, sources[i]); // appending sources
+        sprintf(query, "%s ../%s", query, sources[i]); // appending sources
     }
 
     Token t;
