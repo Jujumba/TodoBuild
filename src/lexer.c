@@ -1,5 +1,4 @@
 #include "lexer.h"
-#include <stdio.h>
 char *path;
 int position;
 Token get_next(FILE* f) {
