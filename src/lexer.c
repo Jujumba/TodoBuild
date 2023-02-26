@@ -1,4 +1,5 @@
 #include "lexer.h"
+#include <stdio.h>
 char *path;
 
 Token get_next(FILE* f) {
@@ -10,6 +11,12 @@ Token get_next(FILE* f) {
         return END;
     }
     int head = 0;
+    if (current == '#') { // skip comments
+        while (current != '\n' && current != EOF) {
+            current = getc(f);
+        }
+        current = getc(f);
+    }
     if (current == '"') {
         if (path == NULL) {
             path = (char*) malloc(sizeof(char) * MAX_PATH_LENGTH);
