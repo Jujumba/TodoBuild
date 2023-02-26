@@ -1,0 +1,5 @@
+add "src/main.c"
+add "src/parser.c"
+add "src/parser.h"
+add "src/lexer.c"
+add "src/lexer.h"
