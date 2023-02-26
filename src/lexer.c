@@ -42,6 +42,8 @@ Token get_next(FILE* f) {
         token =  LINK;
     } else if (!strcmp(command, FLAG_COMMAND)) {
         token =  FLAG;
+    } else if (!strcmp(command, ADD_COMMAND)) {
+        token = ADD;
     }
     ret:
     free(command);

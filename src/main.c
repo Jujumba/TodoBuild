@@ -16,6 +16,7 @@ void compile() {
     create_target();
     chdir("target");
     system(query);
+    free(query);
 }
 
 void create_target() {

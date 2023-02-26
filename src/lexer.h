@@ -6,7 +6,7 @@
 #define INCLUDE_COMMAND "include"
 #define LINK_COMMAND "link"
 #define FLAG_COMMAND "flag"
-
+#define ADD_COMMAND "add"
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -18,6 +18,7 @@ typedef enum {
     LINK,
     FLAG,
     PATH,
+    ADD,
     UNKNOWN
 } Token;
 
