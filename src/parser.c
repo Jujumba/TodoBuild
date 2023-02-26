@@ -6,9 +6,9 @@
 extern char* path;
 char *query = NULL;
 void parse() {
-    FILE* f = fopen("build.todo" ,"r");
+    FILE* f = fopen("build.todo", "r");
     if (f == NULL) {
-        fprintf(stderr, "No file 'build.todo' in the working directory!");
+        fprintf(stderr, "No 'build.todo' file in the working directory!");
         return;
     }
 
