@@ -9,7 +9,7 @@ void parse() {
     FILE* f = fopen("build.todo", "r");
     if (f == NULL) {
         fprintf(stderr, "No 'build.todo' file in the working directory!");
-        return;
+        exit(EXIT_FAILURE);
     }
 
     query = malloc(sizeof(char) * MAX_PATH_LENGTH);
