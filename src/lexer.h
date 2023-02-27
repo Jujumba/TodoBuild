@@ -7,6 +7,8 @@
 #define LINK_COMMAND "link"
 #define FLAG_COMMAND "flag"
 #define ADD_COMMAND "add"
+#define PROJECT_COMMAND "project"
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -14,6 +16,7 @@
 
 typedef enum {
     END = -1,
+    PROJECT,
     INCLUDE,
     LINK,
     FLAG,
