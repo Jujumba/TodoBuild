@@ -3,7 +3,7 @@
 char *comp = NULL;
 
 bool detect() {
-    bool found;
+    bool found = false;
     printf("Detecting the C compiler...\n");
     if (system("clang --version") == 0) {
         comp = "clang";
