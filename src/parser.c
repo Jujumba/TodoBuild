@@ -1,14 +1,13 @@
 #include "parser.h"
 #include "lexer.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 extern char* path;
 char *query = NULL;
+
 void parse() {
     FILE* f = fopen("build.todo", "r");
     if (f == NULL) {
-        fprintf(stderr, "No 'build.todo' file in the working directory!");
+        fprintf(stderr, "No 'build.todo' file in the working directory! Run 'todob init'");
         exit(EXIT_FAILURE);
     }
 
