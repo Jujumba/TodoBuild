@@ -10,7 +10,7 @@ char *name = NULL;
 void parse() {
     FILE* f = fopen("build.todo", "r");
     if (f == NULL) {
-        fprintf(stderr, "No 'build.todo' file in the working directory! Run 'todob init'");
+        fprintf(stderr, "todob: error: no 'build.todo' file in the working directory. Hint: 'todob init'");
         exit(EXIT_FAILURE);
     }
 
@@ -19,7 +19,7 @@ void parse() {
         extern char *comp;
         sprintf(query, "%s", comp);
     } else {
-        printf("Neither clang nor gcc not found on your machine!");
+        printf("todob: error: neither clang nor gcc not found on your machine's path. Hint: add one");
         exit(EXIT_FAILURE);
     }
 
@@ -29,7 +29,7 @@ void parse() {
     while ((t = get_next(f)) != END) {
         if (get_next(f) != PATH) {
             extern int position;
-            fprintf(stderr, "Unexpected token at position: %i", position);
+            fprintf(stderr, "todob: error: unexpected token at position: %i. Hint: reformat the build file", position);
             exit(EXIT_FAILURE);
         }
         char *pattern;
@@ -55,10 +55,6 @@ void parse() {
                 name = malloc(sizeof(char) * MAX_PATH_LENGTH);
                 strcpy(name, path);
                 continue;
-            }
-            default: {
-                fprintf(stderr, "Unexpected token %i", t);
-                return;
             }
         }
         sprintf(query, pattern, query, path);

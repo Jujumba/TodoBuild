@@ -8,11 +8,11 @@ void create_target();
 void project();
 void print_help();
 void init_project(char*);
-void clear();
+void clean();
 
 int main(int argc, char *argv[]) {
     if (argc == 1) {
-        printf("todob: error: Use a '--help' flag to see all available commands\n");
+        printf("todob: error: few arguments. Use a '--help' flag to see all available commands\n");
         exit(EXIT_SUCCESS);
     }
     if (!strcmp(argv[1], "--help")) {
@@ -23,12 +23,12 @@ int main(int argc, char *argv[]) {
         project();
     } else if (!strcmp(argv[1], "init")) {
         if (argc < 3) {
-            fprintf(stderr, "todo: error: specify project name. `todob init my_project`\n");
+            fprintf(stderr, "todo: error: specify project name. Hint: run `todob init my_project`\n");
             exit(EXIT_FAILURE);
         }
         init_project(argv[2]);
-    } else if (!strcmp(argv[1], "clear")) {
-        clear();
+    } else if (!strcmp(argv[1], "clean")) {
+        clean();
     } else {
         printf("todo: error: unknown command. Use a '--help' flag to see all available commands\n");
     }
@@ -77,14 +77,15 @@ void print_help() {
 
 void init_project(char *project) {
     FILE* build_rules = fopen("build.todo", "w");
+    char* rule = "";
+    sprintf(rule, "project \"%s\"", project);
+    
     fprintf(build_rules, "# Your journey starts here...");
-    char* command = "";
-    sprintf(command, "project \"%s\"", project);
-    fprintf(build_rules, "%s", command);
+    fprintf(build_rules, "%s", rule);
 }
 
-void clear() {
+void clean() {
     if (!system("rm -r target")) {
-        printf("No target directory\n");
+        printf("todob: error: no target directory\n");
     }
 }
