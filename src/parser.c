@@ -1,5 +1,6 @@
 #include "parser.h"
 #include "lexer.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 char *query = NULL;
@@ -31,33 +32,35 @@ void parse() {
             fprintf(stderr, "Unexpected token at position: %i", position);
             exit(EXIT_FAILURE);
         }
+        char *pattern;
         switch (t) {
             case INCLUDE: {
-                sprintf(query, "%s -I \"%s\"", query, path);
+                pattern =  "%s -I \"%s\"";
                 break;
             }
             case LINK: {
-                sprintf(query, "%s -L%s", query, path);
+                pattern =  "%s -L%s";
                 break;
             }
             case FLAG: {
-                sprintf(query, "%s %s", query, path);
+                pattern =  "%s %s";
                 break;
             }
             case ADD: {
-                sprintf(query, "%s ../%s", query, path);
+                pattern =  "%s ../%s";
                 break;
             }
             case PROJECT: {
                 rename_sources = true;
                 name = malloc(sizeof(char) * MAX_PATH_LENGTH);
                 strcpy(name, path);
-                break;
+                continue;
             }
             default: {
                 fprintf(stderr, "Unexpected token %i", t);
                 return;
             }
         }
+        sprintf(query, pattern, query, path);
     }
 }
