@@ -5,6 +5,7 @@
 #include "stdlib.h"
 #include "dirent.h"
 #include "stdbool.h"
+#include "string.h" 
 
 void parse();
 

@@ -3,6 +3,8 @@
 
 extern char* path;
 char *query = NULL;
+bool rename_sources = false;
+char *name = NULL;
 
 void parse() {
     FILE* f = fopen("build.todo", "r");
@@ -37,6 +39,12 @@ void parse() {
             }
             case ADD: {
                 sprintf(query, "%s ../%s", query, path);
+                break;
+            }
+            case PROJECT: {
+                rename_sources = true;
+                name = malloc(sizeof(char) * MAX_PATH_LENGTH);
+                strcpy(name, path);
                 break;
             }
             default: {
