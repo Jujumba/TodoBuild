@@ -77,9 +77,10 @@ void print_help() {
 
 void init_project(char *project) {
     FILE* build_rules = fopen("build.todo", "w");
-    char* rule = "";
+    char* rule = malloc(sizeof(char) * 35 + strlen(project)); // Magic number <(^.^)>?
     sprintf(rule, "project \"%s\" # Your project starts here...", project);
-    fprintf(build_rules, "%s", rule);
+    fprintf(build_rules, "%s\n", rule);
+    free(rule);
 }
 
 void clean() {
