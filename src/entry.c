@@ -78,14 +78,10 @@ void print_help() {
 void init_project(char *project) {
     FILE* build_rules = fopen("build.todo", "w");
     char* rule = "";
-    sprintf(rule, "project \"%s\"", project);
-    
-    fprintf(build_rules, "# Your journey starts here...");
+    sprintf(rule, "project \"%s\" # Your project starts here...", project);
     fprintf(build_rules, "%s", rule);
 }
 
 void clean() {
-    if (!system("rm -r target")) {
-        printf("todob: error: no target directory\n");
-    }
+    rmdir("target");
 }
