@@ -11,7 +11,7 @@ Token get_next(FILE* f) {
     }
     int head = 0;
     comment:
-    if (current == '#') { // skip comments
+    while (current == '#') { // skip comments
         while (current != '\n' && current != EOF) {
             current = (char) getc(f);
             ++position;
@@ -19,7 +19,6 @@ Token get_next(FILE* f) {
         current = (char) getc(f);
         ++position;
     }
-    if (current == '#') goto comment;
     if (current == '"') {
         if (path == NULL) {
             path = (char*) malloc(sizeof(char) * MAX_PATH_LENGTH);
@@ -39,7 +38,6 @@ Token get_next(FILE* f) {
         ++position;
         return PATH;
     }
-    // if (current == '#') goto comment;
     char* command = (char*) malloc(sizeof(char) * MAX_COMMAND_LENGTH);
     int token = -1;
     while (isalpha(current)) {
