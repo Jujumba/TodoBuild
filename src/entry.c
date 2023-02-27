@@ -69,6 +69,7 @@ void project() {
     if (rename_sources) {
         #ifdef _WIN32 
             sprintf(name, "%s.%s", name, "exe");
+            remove(name);
             rename("a.exe", name);
         #else
             sprintf(name, "%s.%s", name, "out");
@@ -96,9 +97,17 @@ void init_project(char *project) {
 
 void clean() {
 #ifdef _WIN32
-    RemoveDirectory("target");
+    system("rd /s /q target");
+    if (!RemoveDirectory("target")) {
+        goto err;
+    }
 #else
-    rmdir("target");
+    system("rm -rf target");
+    if (rmdir("target")) {
+        goto err;
+    }
 #endif // _WIN32
-
+    return;
+    err:
+    fprintf(stderr, "todob: error: unable to delete target");
 }
