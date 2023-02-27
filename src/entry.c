@@ -8,6 +8,7 @@ void create_target();
 void project();
 void print_help();
 void init_project();
+void clear();
 
 int main(int argc, char *argv[]) {
     if (argc == 1) {
@@ -22,6 +23,8 @@ int main(int argc, char *argv[]) {
         project();
     } else if (!strcmp(argv[1], "init")) {
         init_project();
+    } else if (!strcmp(argv[1], "clear")) {
+        clear();
     } else {
         printf("Unknown command. Please use a '--help' flag to see all available commands");
     }
@@ -63,11 +66,18 @@ void project() {
 void print_help() {
     printf("Todo build system.\n\n"); // Seriously, I need to come up with a name
     printf("Commands:\n");
-    printf("  build - build your project following with the rules described in build.todo\n");
     printf("  init - create a build.todo in the working directory\n");
+    printf("  build - build your project following with the rules described in build.todo\n");
+    printf("  clear - delete target directory\n");
 }
 
 void init_project() {
     FILE* build_rules = fopen("build.todo", "w");
     fprintf(build_rules, "# Your journey starts here...");
+}
+
+void clear() {
+    if (!system("rm -r target")) {
+        printf("No target directory\n");
+    }
 }
