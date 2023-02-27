@@ -3,6 +3,12 @@
 #include <dirent.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <sys/types.h>
+#include <sys/stat.h>
+#endif // _WIN32
 bool compile();
 void create_target();
 void project();
@@ -89,5 +95,10 @@ void init_project(char *project) {
 }
 
 void clean() {
+#ifdef _WIN32
+    RemoveDirectory("target");
+#else
     rmdir("target");
+#endif // _WIN32
+
 }
