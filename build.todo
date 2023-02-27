@@ -1,5 +1,5 @@
-# It's recommended to add source files before setting other rules up
-add "src/main.c"
+project "todob"
+add "src/entry.c"
 add "src/parser.c"
 add "src/parser.h"
 add "src/lexer.c"
