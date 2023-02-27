@@ -3,7 +3,7 @@
 #include <dirent.h>
 #include <stdlib.h>
 
-void compile();
+bool compile();
 void create_target();
 void project();
 void print_help();
@@ -19,8 +19,12 @@ int main(int argc, char *argv[]) {
         print_help();
     } else if (!strcmp(argv[1], "build")) {
         parse();
-        compile();
+        if (!compile()) {
+            fprintf(stderr, "todob: error: source files are not valid! Hint: reformat them");
+            exit(EXIT_FAILURE);
+        }
         project();
+        printf("\nBuild files are writen to the target\n");
     } else if (!strcmp(argv[1], "init")) {
         if (argc < 3) {
             fprintf(stderr, "todo: error: specify project name. Hint: run `todob init my_project`\n");
@@ -35,13 +39,14 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void compile() {
+bool compile() {
     extern char* query;
     printf("Generated query: %s\n", query);
     create_target();
     chdir("target");
-    system(query);
+    bool success = system(query);
     free(query);
+    return !success;
 }
 
 void create_target() {
