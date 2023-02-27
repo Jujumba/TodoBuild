@@ -1,6 +1,8 @@
 #include "lexer.h"
+
 char *path;
 int position;
+
 Token get_next(FILE* f) {
     static char current = ' ';
     while (isspace(current)) {
@@ -10,7 +12,6 @@ Token get_next(FILE* f) {
         return END;
     }
     int head = 0;
-    comment:
     while (current == '#') { // skip comments
         while (current != '\n' && current != EOF) {
             current = (char) getc(f);
