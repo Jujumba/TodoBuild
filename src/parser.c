@@ -39,7 +39,7 @@ void parse() {
                 break;
             }
             case LINK: {
-                pattern =  "%s -L%s";
+                pattern =  "%s -L \"%s\"";
                 break;
             }
             case FLAG: {
