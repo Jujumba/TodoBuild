@@ -11,7 +11,7 @@ void init_project();
 int main(int argc, char *argv[]) {
     if (argc == 1) {
         printf("Use a '--help' flag to see all available commands\n");
-        exit(EXIT_FAILURE);
+        exit(EXIT_SUCCESS);
     }
     if (!strcmp(argv[1], "--help")) {
         print_help();
