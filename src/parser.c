@@ -1,7 +1,7 @@
 #include "parser.h"
 #include "lexer.h"
+#include <stdlib.h>
 
-extern char* path;
 char *query = NULL;
 bool rename_sources = false;
 char *name = NULL;
@@ -14,10 +14,17 @@ void parse() {
     }
 
     query = malloc(sizeof(char) * MAX_PATH_LENGTH);
-    sprintf(query, "clang");
+    if (detect()) {
+        extern char *comp;
+        sprintf(query, "%s", comp);
+    } else {
+        printf("Neither clang nor gcc not found on your machine!");
+        exit(EXIT_FAILURE);
+    }
 
     Token t;
 
+    extern char* path;
     while ((t = get_next(f)) != END) {
         if (get_next(f) != PATH) {
             extern int position;

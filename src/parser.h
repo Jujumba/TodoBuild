@@ -6,6 +6,7 @@
 #include "dirent.h"
 #include "stdbool.h"
 #include "string.h" 
+#include "detector.h"
 
 void parse();
 
