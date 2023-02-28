@@ -7,8 +7,9 @@ Token get_next(FILE* f) {
     static char current = ' ';
     while (isspace(current)) {
         current = (char) getc(f);
+        ++position;
     }
-    if (current == EOF){
+    if (current == EOF) {
         return END;
     }
     int head = 0;
@@ -64,5 +65,4 @@ Token get_next(FILE* f) {
     ret:
     free(command);
     return token;
-}
-
+}   
