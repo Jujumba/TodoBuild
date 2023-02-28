@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
         printf("\nBuild files are writen to the target\n");
     } else if (!strcmp(argv[1], "init")) {
         if (argc < 3) {
-            fprintf(stderr, "todo: error: specify project name. Hint: run `todob init my_project`\n");
+            fprintf(stderr, "todo: error: too few arguments, specify project name. Hint: run `todob init my_project`\n");
             exit(EXIT_FAILURE);
         }
         init_project(argv[2]);
@@ -73,6 +73,7 @@ void project() {
             rename("a.exe", name);
         #else
             sprintf(name, "%s.%s", name, "out");
+            remove(name);
             rename("a.out", name);
         #endif
         free(name);
